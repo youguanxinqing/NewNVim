@@ -4,27 +4,38 @@ filetype on              " 设置开启文件类型侦测
 filetype plugin on       " 设置加载对应文件类型的插件
 set t_Co=256             " 开启256色支持
 set nu
-set cursorline " 高亮当前行号
-set ignorecase " 忽略大小写
-set incsearch  " 实时搜索
-set tabstop=4
-set expandtab
-set softtabstop=4
-set shiftwidth=4
+set cursorline           " 高亮当前行号
+set ignorecase           " 忽略大小写
+set incsearch            " 实时搜索
+" set tabstop=4
+" set expandtab
+" set softtabstop=4
+set shiftwidth=4         " 缩进宽度
 " set autoindent
 " set smartindent
-set scrolloff=10        " 至少保证 10 行
-set ttimeoutlen=0       " 设置<ESC>键响应时间
-set confirm             " 在处理未保存或只读文件的时候，弹出确认
-syntax enable
+set scrolloff=10         " 至少保证 10 行
+set ttimeoutlen=0        " 设置<ESC>键响应时间
+set confirm              " 在处理未保存或只读文件的时候，弹出确认
+set colorcolumn=81       " 提示线
+syntax enable            " 语法检测
 
 " 重新加载vimrc文件
 nnoremap <leader>ss :source $MYVIMRC<CR>
 " 编辑vimrc文件
 nnoremap <leader>se :edit $MYVIMRC<cr>
-" 一间运行 python 代码
-nnoremap <leader>r :!python %<CR>  
+" 一键运行 python 代码
+nnoremap <leader>r :w<cr>:!python3 %<cr>
+" 括号配对
+inoremap ( ()<ESC>i
+inoremap [ []<ESC>i
+inoremap { {}<ESC>i
+inoremap < <><ESC>i
+inoremap ' ''<ESC>i
+inoremap " ""<ESC>i
+" 粘贴
+set pastetoggle=<F3>
 
+" 插件管理
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'https://github.com/tpope/vim-commentary.git'
@@ -34,9 +45,9 @@ Plug 'https://github.com/itchyny/vim-cursorword.git'
 Plug 'https://github.com/majutsushi/tagbar.git', {'on': 'TagbarToggle'}
 Plug 'https://github.com/Yggdroot/indentLine.git'
 Plug 'https://github.com/Shougo/defx.nvim.git', { 'do': ':UpdateRemotePlugins' }
-Plug 'https://github.com/Yggdroot/LeaderF.git', { 'do': './install.sh', 'on': 'Leaderf'}
+Plug 'https://github.com/Yggdroot/LeaderF.git', { 'do': './install.sh', 'on': ['Leaderf']}
 " 安装 python: CocInstall coc-python
-Plug 'https://github.com/neoclide/coc.nvim.git', {'branch': 'release'}
+Plug 'https://github.com/neoclide/coc.nvim.git'
 Plug 'https://github.com/lfv89/vim-interestingwords.git'
 
 " Plug 'https://github.com/fatih/vim-go.git', { 'do': ':GoUpdateBinaries' }
@@ -45,11 +56,16 @@ Plug 'https://github.com/lfv89/vim-interestingwords.git'
 
 call plug#end()
 
-" 主题
+" theme 设置 ***********************
 colorscheme hybrid
 set background=dark
 
-" defx 设置 ************************
+
+" leaderf 设置 *********************
+" nnoremap <leaderf>s :LeaderfFunctionAll<cr>
+
+
+" defx 设置  ***********************
 " 使用 ;e 切换显示文件浏览，使用 ;a 查找到当前文件位置
 let g:maplocalleader=';'
 nnoremap <silent> <LocalLeader>e
@@ -144,6 +160,7 @@ nnoremap <c-l> <c-w>l
 " 关掉上一次搜索高亮
 noremap <silent><leader>/ :nohls<CR>  
 
+
 " 代码折叠自定义快捷键 <leader>zz
 " let g:FoldMethod = 0
 " map <leader>zz :call ToggleFold()<cr>
@@ -156,7 +173,7 @@ noremap <silent><leader>/ :nohls<CR>
 "         let g:FoldMethod = 0
 "     endif
 " endfun
-"
+
 
 " python-mode 
 " let g:pymode_run = 1
