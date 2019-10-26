@@ -47,7 +47,7 @@ Plug 'https://github.com/Yggdroot/indentLine.git'
 Plug 'https://github.com/Shougo/defx.nvim.git', { 'do': ':UpdateRemotePlugins' }
 Plug 'https://github.com/Yggdroot/LeaderF.git', { 'do': './install.sh', 'on': ['Leaderf']}
 " 安装 python: CocInstall coc-python
-Plug 'https://github.com/neoclide/coc.nvim.git'
+Plug 'https://github.com/neoclide/coc.nvim.git', { 'branch': 'release' }
 Plug 'https://github.com/lfv89/vim-interestingwords.git'
 
 " Plug 'https://github.com/fatih/vim-go.git', { 'do': ':GoUpdateBinaries' }
