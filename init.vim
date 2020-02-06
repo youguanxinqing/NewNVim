@@ -7,7 +7,7 @@ set nu
 set cursorline           " 高亮当前行号
 set ignorecase           " 忽略大小写
 set incsearch            " 实时搜索
-" set tabstop=4
+set tabstop=4
 " set expandtab
 " set softtabstop=4
 set shiftwidth=4         " 缩进宽度
@@ -26,12 +26,12 @@ nnoremap <leader>se :edit $MYVIMRC<cr>
 " 一键运行 python 代码
 nnoremap <leader>r :w<cr>:!python3 %<cr>
 " 括号配对
-inoremap ( ()<ESC>i
-inoremap [ []<ESC>i
-inoremap { {}<ESC>i
-inoremap < <><ESC>i
-inoremap ' ''<ESC>i
-inoremap " ""<ESC>i
+" inoremap ( ()<ESC>i
+" inoremap [ []<ESC>i
+" inoremap { {}<ESC>i
+" inoremap < <><ESC>i
+" inoremap ' ''<ESC>i
+" inoremap \" \""<ESC>i
 " 粘贴
 set pastetoggle=<F3>
 
@@ -49,8 +49,8 @@ Plug 'https://github.com/Yggdroot/LeaderF.git', { 'do': './install.sh', 'on': ['
 " 安装 python: CocInstall coc-python
 Plug 'https://github.com/neoclide/coc.nvim.git', { 'branch': 'release' }
 Plug 'https://github.com/lfv89/vim-interestingwords.git'
+Plug 'https://github.com/fatih/vim-go.git', { 'do': ':GoUpdateBinaries' }
 
-" Plug 'https://github.com/fatih/vim-go.git', { 'do': ':GoUpdateBinaries' }
 " Plug 'https://github.com/python-mode/python-mode.git', { 'for': 'python', 'branch': 'develop' }
 " Plug 'https://github.com/ycm-core/YouCompleteMe.git', { 'do': './install.py' }
 
@@ -173,7 +173,15 @@ noremap <silent><leader>/ :nohls<CR>
 "         let g:FoldMethod = 0
 "     endif
 " endfun
+"
 
+" vim-go
+let g:go_disable_autoinstall = 0
+" let g:go_highlight_functions = 1
+" let g:go_highlight_methods = 1
+" let g:go_highlight_structs = 1
+" let g:go_highlight_operators = 1
+" let g:go_highlight_build_constraints = 1
 
 " python-mode 
 " let g:pymode_run = 1
@@ -186,3 +194,7 @@ noremap <silent><leader>/ :nohls<CR>
 if has("autocmd")
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
+
+" 保存后自动执行 import package
+autocmd BufWritePost  *.go exec ":GoImports"
+
